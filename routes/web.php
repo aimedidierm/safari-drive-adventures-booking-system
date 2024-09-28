@@ -21,6 +21,7 @@ Route::group(["prefix" => "admin", "middleware" => "auth", "as" => "admin."], fu
     Route::get('/', function () {
         return 'Welcom Admin!';
     });
+    Route::view('/profile', 'auth.profile');
 });
 
 Route::group(["prefix" => "client", "middleware" => "client", "as" => "client."], function () {
