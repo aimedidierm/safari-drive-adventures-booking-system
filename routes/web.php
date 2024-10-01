@@ -5,6 +5,8 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TourController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ClientMiddleware;
 use App\Models\Tour;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +29,7 @@ Route::group(["prefix" => "auth", "as" => "auth."], function () {
     Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 });
 
-Route::group(["prefix" => "admin", "middleware" => "auth", "as" => "admin."], function () {
+Route::group(["prefix" => "admin", "middleware" => AdminMiddleware::class, "as" => "admin."], function () {
     Route::get('/', [DashboardController::class, 'admin']);
     Route::resource('/tours', TourController::class)->only('index', 'store', 'destroy');
     Route::resource('/booking', BookingController::class)->only('index');
@@ -35,7 +37,7 @@ Route::group(["prefix" => "admin", "middleware" => "auth", "as" => "admin."], fu
     Route::view('/profile', 'auth.profile');
 });
 
-Route::group(["prefix" => "client", "middleware" => "auth", "as" => "client."], function () {
+Route::group(["prefix" => "client",  "middleware" => ClientMiddleware::class, "as" => "client."], function () {
     Route::get('/', [DashboardController::class, 'client']);
     Route::resource('/tours', TourController::class)->only('index');
     Route::get('/booking', [BookingController::class, 'index']);
