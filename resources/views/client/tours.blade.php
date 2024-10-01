@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tours - Safari-Drive Adventures</title>
-    @vite(['resources/css/app.css','resources/js/app.js'])
-</head>
+@section('content')
 
-<body class="bg-gray-100">
-
-    <x-homepage-navbar />
-
-    <section class="container mx-auto px-6 py-12">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-6">Our Tours 🏕️</h2>
+<x-client-navbar />
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Available Tours 🏕️</h5>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             @foreach ($tours as $tour)
@@ -30,8 +22,6 @@
             </div>
             @endforeach
         </div>
-    </section>
-
-</body>
-
-</html>
+    </div>
+</div>
+@stop

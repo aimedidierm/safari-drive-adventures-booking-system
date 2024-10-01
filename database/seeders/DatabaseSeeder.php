@@ -14,12 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Deafult Admin',
-            'email' => 'test@example.com',
-            'phone' => '0769068699',
-            'password' => bcrypt('password'),
-            'role' => UserRole::ADMIN->value,
-        ]);
+        $this->call(AdminUserSeeder::class);
+        $this->call(ClientUserSeeder::class);
+        $this->call(TourSeeder::class);
     }
 }

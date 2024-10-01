@@ -22,40 +22,27 @@
     <section class="container mx-auto px-6 py-8">
         <h2 class="text-3xl font-semibold text-gray-800">Featured Tours</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+            @foreach ($tours as $tour)
             <div
                 class="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
                 <img src="/images/image.png" alt="Tour 1" class="w-full h-48 object-cover">
                 <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-800">🌍 Safari in Nairobi National Park</h3>
-                    <p class="text-gray-600 mt-2">Experience the beauty of the Nairobi National Park...</p>
-                    <a href="/tour-details" class="text-green-600 hover:text-green-700 mt-4 inline-block">Learn More</a>
+                    <h3 class="text-xl font-semibold text-gray-800">{{$tour->title}}</h3>
+                    <p class="text-gray-600 mt-2">{{$tour->description}}</p>
+                    <a href="/tour-details/{{$tour->id}}"
+                        class="text-green-600 hover:text-green-700 mt-4 inline-block">Learn More</a>
                 </div>
             </div>
-            <div
-                class="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <img src="/images/image.png" alt="Tour 1" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-800">🌍 Safari in Nairobi National Park</h3>
-                    <p class="text-gray-600 mt-2">Experience the beauty of the Nairobi National Park...</p>
-                    <a href="/tour-details" class="text-green-600 hover:text-green-700 mt-4 inline-block">Learn More</a>
-                </div>
-            </div>
-            <div
-                class="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <img src="/images/image.png" alt="Tour 1" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-800">🌍 Safari in Nairobi National Park</h3>
-                    <p class="text-gray-600 mt-2">Experience the beauty of the Nairobi National Park...</p>
-                    <a href="/tour-details" class="text-green-600 hover:text-green-700 mt-4 inline-block">Learn More</a>
-                </div>
-            </div>
+            @endforeach
         </div>
         <br>
+        @if ($tours->isNotEmpty())
         <div class="flex justify-center">
             <a href="/tours"
                 class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 text-xl font-semibold">
                 More tours</a>
         </div>
+        @endif
     </section>
 
     <section class="container mx-auto px-6 py-12" id="about-us">
