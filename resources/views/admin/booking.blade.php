@@ -18,10 +18,13 @@
                             Tour
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Description
+                            Tour Price
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Price
+                            Seat
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Payed Amount
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
@@ -45,11 +48,14 @@
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{$item->tour->title}}
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{$item->tour->description}}
-                        </th>
                         <td class="px-6 py-4">
                             {{$item->tour->price}} KES
+                        </td>
+                        <td class="px-6 py-4">
+                            {{$item->seat}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{$item->payed_amount}} KES
                         </td>
                         <td class="px-6 py-4">
                             {{$item->status}}

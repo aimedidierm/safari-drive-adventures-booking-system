@@ -18,7 +18,6 @@ Route::view('/about-us', 'about-us');
 Route::get('/tours', [TourController::class, 'showMore']);
 Route::get('/tour-details/{id}', [TourController::class, 'show']);
 Route::view('/book-tour', 'book-tour');
-Route::view('/contact-us', 'contact-us');
 
 Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
@@ -40,6 +39,7 @@ Route::group(["prefix" => "admin", "middleware" => AdminMiddleware::class, "as" 
 Route::group(["prefix" => "client",  "middleware" => ClientMiddleware::class, "as" => "client."], function () {
     Route::get('/', [DashboardController::class, 'client']);
     Route::resource('/tours', TourController::class)->only('index');
-    Route::get('/booking', [BookingController::class, 'index']);
+    Route::resource('/booking', BookingController::class)->only('index', 'store');
     Route::view('/profile', 'auth.profile');
+    Route::get('/book/{id}', [BookingController::class, 'show']);
 });

@@ -54,7 +54,7 @@
 
     <section class="container mx-auto px-6 py-12">
         <div class="flex justify-center">
-            <a href="#"
+            <a href="/client/book/{{$tour->id}}"
                 class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 text-xl font-semibold">Book
                 Now</a>
         </div>
