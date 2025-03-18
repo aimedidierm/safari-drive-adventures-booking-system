@@ -13,13 +13,13 @@
     <x-homepage-navbar />
 
     <section class="container mx-auto px-6 py-12">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-6">Our Tours 🏕️</h2>
+        <h2 class="text-3xl font-semibold text-gray-800 mb-6">Top Destinations 🏕️</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             @foreach ($tours as $tour)
             <div
                 class="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <img src="/images/image.png" alt="Tour 1" class="w-full h-48 object-cover">
+                <img src="{{ asset('images/' . ($tour->image ? $tour->image : 'image.png')) }}" alt="Tour 1" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold text-gray-800">{{$tour->title}}</h3>
                     <p class="text-gray-600 mt-2">{{$tour->description}}</p>

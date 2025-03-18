@@ -46,6 +46,26 @@
             </div>
 
             <div class="mb-4">
+                <div class="heading text-lg font-semibold mb-2">Enter Details of <span id="number" class="font-bold"></span></div>
+                <div class="container">
+                    <div class="flex items-center gap-4"> <!-- Added gap-4 for consistent spacing -->
+                        <input type="text" name="name[]" id="name-1" placeholder="Enter 1st person name" class="p-2 border rounded-md flex-1">
+                        <input type="number" name="id_no[]" id="id-1" placeholder="Enter ID/Passport No" class="p-2 border rounded-md flex-1">
+                        <div class="flex items-center gap-4"> <!-- Added gap-4 for consistent spacing -->
+                            <label for="male" class="flex items-center gap-2"> <!-- Added gap-2 for radio button spacing -->
+                                <input type="radio" name="gender-1" id="male" value="male" class="form-radio">
+                                <span>Male</span>
+                            </label>
+                            <label for="female" class="flex items-center gap-2"> <!-- Added gap-2 for radio button spacing -->
+                                <input type="radio" name="gender-1" id="female" value="female" class="form-radio">
+                                <span>Female</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
                 <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Payment Phone Number</label>
                 <input type="tel" id="phone" name="phone" placeholder="Enter your phone number"
                     class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
@@ -59,4 +79,47 @@
         </form>
     </div>
 </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const peopleInput = document.getElementById("people");
+    const numberSpan = document.getElementById("number");
+    const containerWrapper = document.querySelector(".mb-4 .container");
+
+    peopleInput.addEventListener("change", function () {
+        let count = parseInt(this.value, 10);
+        numberSpan.textContent = count;
+
+        // Remove existing dynamically added containers
+        document.querySelectorAll(".dynamic-container").forEach(el => el.remove());
+
+        for (let i = 2; i <= count; i++) { // Start from 2 since the first one already exists
+            let newContainer = document.createElement("div");
+            newContainer.classList.add("container", "dynamic-container", "flex", "items-center", "gap-4", "mt-4"); <!-- Added mt-4 -->
+            newContainer.innerHTML = `
+                <input type="text" name="name[]" id="name-${i}" placeholder="Enter ${getOrdinal(i)} person's name" class="p-2 border rounded-md flex-1">
+                <input type="text" name="id_no[]" id="id-${i}" placeholder="Enter ${getOrdinal(i)} person's ID/Passport No" class="p-2 border rounded-md flex-1">
+                <div class="flex items-center gap-4">
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="gender-${i}" value="Male" class="form-radio">
+                        <span>Male</span>
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="gender-${i}" value="Female" class="form-radio">
+                        <span>Female</span>
+                    </label>
+                </div>
+            `;
+            containerWrapper.appendChild(newContainer);
+        }
+    });
+    function getOrdinal(n) {
+        const suffixes = ["th", "st", "nd", "rd"];
+        const remainder = n % 100;
+        return n + (suffixes[(remainder - 20) % 10] || suffixes[remainder] || suffixes[0]);
+    }
+});
+
+</script>
 @stop

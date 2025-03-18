@@ -120,6 +120,10 @@
                                     required></textarea>
                             </div>
 
+                            <br>
+                            <input type="file" name="image" id="image" accept="images/*">
+                            <br>
+
                             <div class="mb-6">
                                 <label for="overview"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Overview</label>

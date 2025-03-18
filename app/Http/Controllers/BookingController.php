@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\BookingStatus;
-use App\Enums\TransactionStatus;
-use App\Enums\UserRole;
-use App\Http\Requests\BookRequest;
-use App\Models\Booking;
 use App\Models\Tour;
+use App\Enums\UserRole;
+use App\Models\Booking;
 use App\Models\Transaction;
+use App\Models\TravelBuddy;
+use App\Enums\BookingStatus;
 use Illuminate\Http\Request;
+use App\Enums\TransactionStatus;
+use App\Http\Requests\BookRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
@@ -45,7 +47,7 @@ class BookingController extends Controller
             "ref" => "XXX",
             "status" => TransactionStatus::PENDING->value,
         ]);
-        Booking::create([
+        $book = Booking::create([
             'seat' => $request->input('seat'),
             'payed_amount' => $calculatedAmount,
             'user_id' => Auth::id(),
@@ -53,7 +55,34 @@ class BookingController extends Controller
             'transaction_ref' => 'XXX',
             'status' => BookingStatus::PENDING->value,
         ]);
-        return redirect('/client/booking')->with('success', 'Booking created successfully! please make payment');
+
+        // Save the invited people (travel buddies)
+        if($request->input('seat') > 1){
+            $people = [];
+            $genders = $request->input('gender'); // Retrieve gender array
+
+            for ($i = 0; $i < $request->input('seat'); $i++) {
+                $genderKey = "gender-" . ($i + 1) ; // Construct gender input key dynamically
+            
+                $people[] = [
+                    "name" => $request->input('name')[$i],
+                    "id_no" => $request->input('id_no')[$i],
+                    "gender" => $request->input($genderKey),
+                ];
+            }
+
+            
+            foreach ($people as $person) {
+                TravelBuddy::create([
+                    'name' => $person['name'],
+                    'id_number' => $person['id_no'],
+                    'gender' => $person['gender'],
+                    'booking_id' => $book->id, // Fix: changed to correct column name
+                ]);
+            }
+        }
+        
+        return redirect('/paystack/pay')->with('success', 'Booking created successfully! please make payment');
     }
 
     /**

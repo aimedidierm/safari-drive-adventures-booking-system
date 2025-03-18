@@ -48,6 +48,17 @@ class TourController extends Controller
         $tour->additional_information = $request->additional_information;
         $tour->price = $request->price;
 
+        if($request->hasFile('image')){
+            $request->validate([
+                'image' => 'required|image|mimes:jpg,png,jpeg'
+            ]);
+
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $tour->image = $imageName;
+        }
+
         $tour->save();
 
         return redirect('/admin/tours')->with('success', 'Tour added successfully!');

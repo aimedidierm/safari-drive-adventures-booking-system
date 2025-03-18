@@ -12,7 +12,7 @@
 
     <x-homepage-navbar />
 
-    <header class="bg-cover bg-center h-96" style="background-image: url('/images/image.png');">
+    <header class="bg-cover bg-center h-96" style="background-image: url('/images/{{$tour->image}}');">
         <div class="bg-green-800 bg-opacity-50 h-full flex flex-col justify-center items-center text-center">
             <h1 class="text-white text-5xl font-bold">{{$tour->title}}</h1>
             <p class="text-white text-xl mt-4">{{$tour->description}}</p>

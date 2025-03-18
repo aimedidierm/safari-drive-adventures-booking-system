@@ -11,9 +11,10 @@ use App\Models\Tour;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $tours = Tour::latest()->take(3)->get();
+    $tours = Tour::orderBy('created_at', 'ASC')->limit(3)->get();
     return view('home', compact('tours'));
 });
+
 Route::view('/about-us', 'about-us');
 Route::get('/tours', [TourController::class, 'showMore']);
 Route::get('/tour-details/{id}', [TourController::class, 'show']);
@@ -42,4 +43,13 @@ Route::group(["prefix" => "client",  "middleware" => ClientMiddleware::class, "a
     Route::resource('/booking', BookingController::class)->only('index', 'store');
     Route::view('/profile', 'auth.profile');
     Route::get('/book/{id}', [BookingController::class, 'show']);
+
+    
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/paystack/pay', [App\Http\Controllers\PaystackPaymentController::class, 'index'])->name('paystack.index');
+    Route::post('/paystack/pay', [App\Http\Controllers\PaystackPaymentController::class, 'initiatePayment'])->name('paystack.pay');
+    Route::get('/paystack/callback', [App\Http\Controllers\PaystackPaymentController::class, 'handleCallback'])->name('paystack.callback');
 });
