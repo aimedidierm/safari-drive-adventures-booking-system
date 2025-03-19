@@ -49,16 +49,16 @@ class TourController extends Controller
         $tour->location = $request->location;
         $tour->price = $request->price;
 
-        // if ($request->hasFile('image')) {
-        //     $request->validate([
-        //         'image' => 'required|image|mimes:jpg,png,jpeg'
-        //     ]);
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'required|image|mimes:jpg,png,jpeg'
+            ]);
 
-        //     $image = $request->file('image');
-        //     $imageName = $image->getClientOriginalName();
-        //     $image->move(public_path('images'), $imageName);
-        //     $tour->image = $imageName;
-        // }
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $tour->image = $imageName;
+        }
 
         $tour->save();
 
