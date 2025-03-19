@@ -20,6 +20,7 @@
     </header>
 
     <section class="container mx-auto px-6 py-12">
+
         <h2 class="text-3xl font-semibold text-gray-800 mb-6">Tour Overview</h2>
         <p class="text-gray-700 leading-relaxed mb-6">
             {{$tour->overview}}
@@ -50,7 +51,17 @@
             <h3 class="text-2xl font-semibold text-gray-800 mb-4">Additional Information</h3>
             {{$tour->additional_information}}
         </div>
+        @if ($tour->location != null)
+        <section class="container mt-12">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Location</h3>
+            <a href="https://www.google.com/maps/search/{{$tour->location}}" target="_blank"
+                class="text-blue-600 hover:underline">
+                Open on google map
+            </a>
+        </section>
+        @endif
     </section>
+
 
     <section class="container mx-auto px-6 py-12">
         <div class="flex justify-center">

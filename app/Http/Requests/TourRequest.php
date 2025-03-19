@@ -27,6 +27,7 @@ class TourRequest extends FormRequest
             'overview' => 'required|string',
             'highlights' => 'required|array',
             'highlights.*' => 'string',
+            'location' => 'required|string|max:255',
             'itinerary' => 'required|array',
             'itinerary.*' => 'string',
             'additional_information' => 'required|string',

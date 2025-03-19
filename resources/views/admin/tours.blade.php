@@ -68,7 +68,7 @@
                         <form action="/admin/tours" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="flex flex-wrap -mx-3 mb-6">
-                                <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                     <label for="title"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
                                     <input type="text" id="title" name="title"
@@ -76,10 +76,18 @@
                                         required>
                                 </div>
 
+                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    <label for="location"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+                                    <input type="text" id="location" name="location"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required>
+                                </div>
+
                                 <div class="w-full md:w-1/3 px-3">
                                     <label for="price"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price
-                                        (USD)</label>
+                                        (KES)</label>
                                     <input type="number" step="0.01" id="price" name="price"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required>
